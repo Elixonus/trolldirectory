@@ -20,7 +20,7 @@ def troll_directory(directory_path: str) -> None:
         image_paths.append(file_path)
     for i, image_path in enumerate(image_paths):
         troll_image(image_path)
-        print(f"Trolled {(i + 1)} out of {len(image_paths)}\r")
+        print(f"Trolled {(i + 1)} out of {len(image_paths)}")
 
 
 def troll_image(image_path: str) -> None:
