@@ -27,7 +27,7 @@ def troll_directory(directory_path: str) -> None:
 
 def troll_image(image_path: str) -> bool:
     image = cv2.imread(image_path)
-    faces, confidences = cv.detect_face(image, threshold=0.1)
+    faces, confidences = cv.detect_face(image, threshold=0.2)
     image = Image.fromarray(image)
     for face in faces:
         dx = int(0.2 * (face[2] - face[0]))
@@ -38,8 +38,7 @@ def troll_image(image_path: str) -> bool:
         troll_face = troll_face.resize((ex - sx, ey - sy))
         image.paste(troll_face, (sx, sy), mask=troll_face)
     if len(faces) > 0:
-        plt.imshow(image)
-        plt.show()
+        image.save(image_path + "trolled")
         return True
     else:
         return False
