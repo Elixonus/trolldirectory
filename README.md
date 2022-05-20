@@ -8,7 +8,9 @@ Run the following command in which working directory you intend to troll.
 
 ```python trolldirectory.py```
 
-## Dangers
+## Information
 Will mess up images so be make sure to make a copy.
 
 Runs recursively through every image in the folders.
+
+No liabilities for any damages this program may cause.
