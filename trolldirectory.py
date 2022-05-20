@@ -18,14 +18,16 @@ def troll_directory(directory_path: str) -> None:
         image_paths.append(file_path)
     for file_path in glob.iglob(directory_path + "**/*.gif", recursive=True):
         image_paths.append(file_path)
+    counter = 0
     for i, image_path in enumerate(image_paths):
-        troll_image(image_path)
-        print(f"Trolled {(i + 1)} out of {len(image_paths)}")
+        if troll_image(image_path):
+            counter += 1
+            print(f"Trolled {counter}")
 
 
-def troll_image(image_path: str) -> None:
+def troll_image(image_path: str) -> bool:
     image = cv2.imread(image_path)
-    faces, confidences = cv.detect_face(image)
+    faces, confidences = cv.detect_face(image, threshold=0.1)
     image = Image.fromarray(image)
     for face in faces:
         dx = int(0.2 * (face[2] - face[0]))
@@ -35,8 +37,12 @@ def troll_image(image_path: str) -> None:
         troll_face = Image.open(os.path.join(dirname, "images/trollface.png"))
         troll_face = troll_face.resize((ex - sx, ey - sy))
         image.paste(troll_face, (sx, sy), mask=troll_face)
-    plt.imshow(image)
-    plt.show()
+    if len(faces) > 0:
+        plt.imshow(image)
+        plt.show()
+        return True
+    else:
+        return False
 
 
 print(r"""
