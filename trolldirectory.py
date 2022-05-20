@@ -10,9 +10,16 @@ dirname = os.path.dirname(__file__)
 
 def troll_directory(directory_path: str) -> None:
     image_paths = []
-    for filename in glob.iglob(directory_path + "**/*.png", recursive=True):
-        image_paths.append()
-
+    for file_path in glob.iglob(directory_path + "**/*.png", recursive=True):
+        image_paths.append(file_path)
+    for file_path in glob.iglob(directory_path + "**/*.jpg", recursive=True):
+        image_paths.append(file_path)
+    for file_path in glob.iglob(directory_path + "**/*.jpeg", recursive=True):
+        image_paths.append(file_path)
+    for file_path in glob.iglob(directory_path + "**/*.gif", recursive=True):
+        image_paths.append(file_path)
+    for image_path in image_paths:
+        troll_image(image_path)
 
 def troll_image(image_path: str) -> None:
     image = cv2.imread(image_path)
@@ -30,4 +37,16 @@ def troll_image(image_path: str) -> None:
     plt.show()
 
 
-troll_directory("")
+directory_path = input("Directory to troll: ")
+print(f"You sure you want to troll directory? {os.path.abspath(directory_path)}")
+while True:
+    do = input("Sure? [Y][N]: ")
+    if do.upper() == "YES" or do.upper() == "Y":
+        break
+    elif do.upper() == "NO" or do.upper() == "N":
+        quit()
+    else:
+        continue
+
+
+troll_directory(directory_path)
