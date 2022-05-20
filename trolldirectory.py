@@ -18,8 +18,10 @@ def troll_directory(directory_path: str) -> None:
         image_paths.append(file_path)
     for file_path in glob.iglob(directory_path + "**/*.gif", recursive=True):
         image_paths.append(file_path)
-    for image_path in image_paths:
+    for i, image_path in enumerate(image_paths):
         troll_image(image_path)
+        print(f"Trolled {(i + 1)} out of {len(image_paths)}\r")
+
 
 def troll_image(image_path: str) -> None:
     image = cv2.imread(image_path)
@@ -37,8 +39,18 @@ def troll_image(image_path: str) -> None:
     plt.show()
 
 
-directory_path = input("Directory to troll: ")
-print(f"You sure you want to troll directory? {os.path.abspath(directory_path)}")
+print(r"""
+  _____    ____    U  ___ u   _       _      
+ |_ " _|U |  _"\ u  \/"_ \/  |"|     |"|     
+   | |   \| |_) |/  | | | |U | | u U | | u   
+  /| |\   |  _ <.-,_| |_| | \| |/__ \| |/__  
+ u |_|U   |_| \_\\_)-\___/   |_____| |_____| 
+ _// \\_  //   \\_    \\     //  \\  //  \\  
+(__) (__)(__)  (__)  (__)   (_")("_)(_")("_) 
+""")
+
+directory = input("Directory to troll: ")
+print(f"You sure you want to troll directory? {os.path.abspath(directory)}")
 while True:
     do = input("Sure? [Y][N]: ")
     if do.upper() == "YES" or do.upper() == "Y":
@@ -47,6 +59,6 @@ while True:
         quit()
     else:
         continue
+print()
 
-
-troll_directory(directory_path)
+troll_directory(directory)
