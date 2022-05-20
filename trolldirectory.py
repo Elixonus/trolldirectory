@@ -1,7 +1,7 @@
 import os
 import glob
+import random
 import cv2
-import matplotlib.pyplot as plt
 import cvlib as cv
 from PIL import Image
 
@@ -30,15 +30,23 @@ def troll_image(image_path: str) -> bool:
     faces, confidences = cv.detect_face(image, threshold=0.2)
     image = Image.fromarray(image)
     for face in faces:
-        dx = int(0.2 * (face[2] - face[0]))
-        dy = int(0 * (face[3] - face[1]))
+        meme = random.choices(
+            ["trollface.png", "megustaface.png", "lolface.png", "sombreroface.png"],
+            weights=[1, 0.4, 0.4, 0.4]
+        )[0]
+        meme_face = Image.open(os.path.join(dirname, f"images/{meme}"))
+        dx = int(0.4 * (face[2] - face[0]))
+        dy = int(0.2 * (face[3] - face[1]))
+        if meme == "sombreroface.png":
+            dx = int(0.8 * (face[2] - face[0]))
+            dy = int(0.4 * (face[3] - face[1]))
         sx, sy = face[0] - dx, face[1] - dy
         ex, ey = face[2] + dx, face[3] + dy
-        troll_face = Image.open(os.path.join(dirname, "images/trollface.png"))
-        troll_face = troll_face.resize((ex - sx, ey - sy))
-        image.paste(troll_face, (sx, sy), mask=troll_face)
+        meme_face = meme_face.resize((ex - sx, ey - sy))
+        print(meme)
+        image.paste(meme_face, (sx, sy), mask=meme_face)
     if len(faces) > 0:
-        image.save(image_path + "trolled")
+        image.save(image_path)
         return True
     else:
         return False
@@ -65,5 +73,5 @@ while True:
     else:
         continue
 print()
-
 troll_directory(directory)
+print("It's done boss.")
