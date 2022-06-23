@@ -66,7 +66,7 @@ print(r"""
 directory = input("Directory to troll: ")
 print(f"You sure you want to troll directory? {os.path.abspath(directory)}")
 while True:
-    do = input("Sure? [Y][N]: ")
+    do = input("Sure? (Y/N): ")
     if do.upper() == "YES" or do.upper() == "Y":
         break
     elif do.upper() == "NO" or do.upper() == "N":
