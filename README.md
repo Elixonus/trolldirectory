@@ -1,5 +1,5 @@
 # trolldirectory :clown_face:
-Command line utility to replace all images with faces in a directory with troll faces.
+Command line utility to replace all images in a directory with troll faces.
 
 ## Usage
 ```
