@@ -9,7 +9,7 @@ pip install -r requirements.txt
 Run the following command from the working directory you intend to troll.
 
 ```
-python trolldirectory.py
+python path/to/trolldirectory.py
 ```
 
 It is also possible to add the `trolldirectory` folder to path for easier usage.
